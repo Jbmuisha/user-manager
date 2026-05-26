@@ -110,34 +110,36 @@ export default function EditUserModal({
   };
 
   return (
-    <Dialog
+<Dialog
       open={open}
       onClose={onClose}
       maxWidth="sm"
       fullWidth
       sx={{
-        "& .MuiPaper-root": {
-          borderRadius: 3,
-          padding: 1,
-        },
+        "& .MuiDialog-paper": {
+          borderRadius: "12px",
+          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.12)",
+        }
       }}
     >
-      <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <Box>
-          <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-            Edit User
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Update user information
-          </Typography>
+      <DialogTitle sx={{ pb: 1, borderBottom: "1px solid #e2e8f0" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: "bold", color: "#1e293b" }}>
+              Edit User
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Update user information
+            </Typography>
+          </Box>
+          <IconButton onClick={onClose} size="small" sx={{ color: "#64748b" }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
-        <IconButton onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
       </DialogTitle>
 
       <form onSubmit={handleSubmit}>
-        <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2.5, pt: 2 }}>
+        <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2.5, pt: 3 }}>
           {/* Name */}
           <TextField
             label="Name *"
@@ -146,6 +148,14 @@ export default function EditUserModal({
             placeholder="Enter full name"
             fullWidth
             required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: 2,
+                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#4f46e5" },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#4f46e5" },
+              },
+              "& .MuiInputLabel-root.Mui-focused": { color: "#4f46e5" },
+            }}
           />
 
           {/* Email */}
@@ -157,6 +167,14 @@ export default function EditUserModal({
             placeholder="Enter email address"
             fullWidth
             required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: 2,
+                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#4f46e5" },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#4f46e5" },
+              },
+              "& .MuiInputLabel-root.Mui-focused": { color: "#4f46e5" },
+            }}
           />
 
           {/* Role */}
@@ -166,6 +184,12 @@ export default function EditUserModal({
               value={role}
               label="Role"
               onChange={(e) => setRole(e.target.value as UserRole)}
+              sx={{
+                borderRadius: 2,
+                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#4f46e5" },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#4f46e5" },
+                "& .MuiInputLabel-root.Mui-focused": { color: "#4f46e5" },
+              }}
             >
               {roles.map((r) => (
                 <MenuItem key={r} value={r}>
@@ -181,21 +205,50 @@ export default function EditUserModal({
               <Checkbox
                 checked={isActive}
                 onChange={(e) => setIsActive(e.target.checked)}
-                color="primary"
+                sx={{
+                  color: "#4f46e5",
+                  "&.Mui-checked": { color: "#4f46e5" },
+                }}
               />
             }
-            label="Active User"
+            label={
+              <Typography sx={{ color: "#1e293b", fontWeight: 500 }}>
+                Active User
+              </Typography>
+            }
           />
         </DialogContent>
 
-        <DialogActions sx={{ padding: 2, pt: 0 }}>
-          <Button onClick={onClose} variant="outlined">
+        <DialogActions sx={{ px: 3, pb: 3, gap: 2 }}>
+          <Button 
+            onClick={onClose} 
+            variant="outlined"
+            sx={{ 
+              borderRadius: 2,
+              borderColor: "#e2e8f0",
+              color: "#64748b",
+              textTransform: "none",
+              "&:hover": {
+                borderColor: "#cbd5e1",
+                backgroundColor: "#f8fafc",
+              }
+            }}
+          >
             Cancel
           </Button>
           <Button
             type="submit"
             variant="contained"
             disabled={loading}
+            sx={{
+              backgroundColor: "#4f46e5",
+              borderRadius: 2,
+              textTransform: "none",
+              fontWeight: 600,
+              px: 3,
+              "&:hover": { backgroundColor: "#4338ca" },
+              "&:disabled": { backgroundColor: "#cbd5e1" },
+            }}
           >
             {loading ? "Updating..." : "Update User"}
           </Button>

@@ -53,15 +53,26 @@ export default function DeleteConfirmModal({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ pb: 1 }}>
+<Dialog 
+      open={open} 
+      onClose={onClose} 
+      maxWidth="sm" 
+      fullWidth
+      sx={{
+        "& .MuiDialog-paper": {
+          borderRadius: "12px",
+          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.12)",
+        }
+      }}
+    >
+      <DialogTitle sx={{ pb: 1, borderBottom: "1px solid #e2e8f0" }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Box sx={{ bgcolor: "error.light", borderRadius: 2, p: 1, display: "flex" }}>
-              <WarningAmberIcon sx={{ color: "error.main" }} />
+            <Box sx={{ bgcolor: "#fef3c7", borderRadius: 2, p: 1, display: "flex" }}>
+              <WarningAmberIcon sx={{ color: "#d97706" }} />
             </Box>
             <Box>
-              <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+              <Typography variant="h5" sx={{ fontWeight: "bold", color: "#1e293b" }}>
                 Delete User
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -69,25 +80,52 @@ export default function DeleteConfirmModal({
               </Typography>
             </Box>
           </Box>
-          <IconButton onClick={onClose} size="small">
+          <IconButton onClick={onClose} size="small" sx={{ color: "#64748b" }}>
             <CloseIcon />
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent sx={{ pt: 2 }}>
-        <Typography variant="body1">
+      <DialogContent sx={{ pt: 3 }}>
+        <Typography variant="body1" sx={{ color: "#475569" }}>
           Are you sure you want to delete{" "}
-          <Typography component="span" sx={{ fontWeight: "bold" }}>
+          <Typography component="span" sx={{ fontWeight: "bold", color: "#1e293b" }}>
             {user.name}
           </Typography>
           ? This will permanently remove the user and all associated data.
         </Typography>
       </DialogContent>
-      <DialogActions sx={{ px: 3, pb: 3 }}>
-        <Button onClick={onClose} variant="outlined">
+      <DialogActions sx={{ px: 3, pb: 3, gap: 2 }}>
+        <Button 
+          onClick={onClose} 
+          variant="outlined"
+          sx={{ 
+            borderRadius: 2,
+            borderColor: "#e2e8f0",
+            color: "#64748b",
+            textTransform: "none",
+            "&:hover": {
+              borderColor: "#cbd5e1",
+              backgroundColor: "#f8fafc",
+            }
+          }}
+        >
           Cancel
         </Button>
-        <Button onClick={handleDelete} variant="contained" color="error" disabled={loading}>
+        <Button 
+          onClick={handleDelete} 
+          variant="contained" 
+          color="error" 
+          disabled={loading}
+          sx={{
+            borderRadius: 2,
+            textTransform: "none",
+            fontWeight: 600,
+            px: 3,
+            "&:hover": {
+              backgroundColor: "#dc2626",
+            },
+          }}
+        >
           {loading ? "Deleting..." : "Delete User"}
         </Button>
       </DialogActions>

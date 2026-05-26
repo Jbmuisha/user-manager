@@ -107,29 +107,36 @@ export default function CreateUserModal({
   };
 
   return (
-    <Dialog
+<Dialog 
+      className="modal-enter"
       open={open}
       onClose={handleClose}
       maxWidth="sm"
       fullWidth
+      sx={{
+        "& .MuiDialog-paper": {
+          borderRadius: "12px",
+          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.12)",
+        }
+      }}
     >
-      <DialogTitle sx={{ pb: 1 }}>
+      <DialogTitle sx={{ pb: 1, borderBottom: "1px solid #e2e8f0" }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Box>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+            <Typography variant="h5" sx={{ fontWeight: "bold", color: "#1e293b" }}>
               Create User
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Add a new user to the system
             </Typography>
           </Box>
-          <IconButton onClick={handleClose} size="small">
+          <IconButton onClick={handleClose} size="small" sx={{ color: "#64748b" }}>
             <CloseIcon />
           </IconButton>
         </Box>
       </DialogTitle>
       <form onSubmit={handleSubmit}>
-        <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2.5, pt: 2 }}>
+        <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2.5, pt: 3 }}>
           <TextField
             label="Name *"
             value={name}
@@ -137,6 +144,20 @@ export default function CreateUserModal({
             placeholder="Enter full name"
             fullWidth
             required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: 2,
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#4f46e5",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#4f46e5",
+                },
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "#4f46e5",
+              },
+            }}
           />
           <TextField
             label="Email *"
@@ -146,6 +167,20 @@ export default function CreateUserModal({
             placeholder="Enter email address"
             fullWidth
             required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: 2,
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#4f46e5",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#4f46e5",
+                },
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "#4f46e5",
+              },
+            }}
           />
           <FormControl fullWidth>
             <InputLabel>Role</InputLabel>
@@ -153,6 +188,18 @@ export default function CreateUserModal({
               value={role}
               label="Role"
               onChange={(e) => setRole(e.target.value as UserRole)}
+              sx={{
+                borderRadius: 2,
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#4f46e5",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#4f46e5",
+                },
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#4f46e5",
+                },
+              }}
             >
               {roles.map((r) => (
                 <MenuItem key={r} value={r}>
@@ -166,17 +213,56 @@ export default function CreateUserModal({
               <Checkbox
                 checked={isActive}
                 onChange={(e) => setIsActive(e.target.checked)}
-                color="primary"
+                sx={{
+                  color: "#4f46e5",
+                  "&.Mui-checked": {
+                    color: "#4f46e5",
+                  },
+                }}
               />
             }
-            label="Active User"
+            label={
+              <Typography sx={{ color: "#1e293b", fontWeight: 500 }}>
+                Active User
+              </Typography>
+            }
           />
         </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 3 }}>
-          <Button onClick={handleClose} variant="outlined">
+        <DialogActions sx={{ px: 3, pb: 3, gap: 2 }}>
+          <Button 
+            onClick={handleClose} 
+            variant="outlined"
+            sx={{ 
+              borderRadius: 2,
+              borderColor: "#e2e8f0",
+              color: "#64748b",
+              textTransform: "none",
+              "&:hover": {
+                borderColor: "#cbd5e1",
+                backgroundColor: "#f8fafc",
+              }
+            }}
+          >
             Cancel
           </Button>
-          <Button type="submit" variant="contained" disabled={loading}>
+          <Button 
+            type="submit" 
+            variant="contained" 
+            disabled={loading}
+            sx={{
+              backgroundColor: "#4f46e5",
+              borderRadius: 2,
+              textTransform: "none",
+              fontWeight: 600,
+              px: 3,
+              "&:hover": {
+                backgroundColor: "#4338ca",
+              },
+              "&:disabled": {
+                backgroundColor: "#cbd5e1",
+              },
+            }}
+          >
             {loading ? "Creating..." : "Create User"}
           </Button>
         </DialogActions>

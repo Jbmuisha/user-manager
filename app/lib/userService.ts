@@ -35,7 +35,7 @@ export const getUsers = async (): Promise<User[]> => {
       throw new ApiError(0, "Backend CORS not configured. Contact backend developer to add 'Access-Control-Allow-Origin: http://localhost:3000' header.");
     }
     if (error.response) {
-      const status = error.response.status;
+      const status = error.response;
       const message = error.response.data?.message || "Failed to fetch users";
       throw new ApiError(status, message);
     }
@@ -56,7 +56,7 @@ export const getUser = async (id: number): Promise<User> => {
       throw new ApiError(0, "Backend CORS not configured. Contact backend developer to add CORS headers.");
     }
     if (error.response) {
-      const status = error.response.status;
+      const status = error.response;
       const message = error.response.data?.message || "User not found";
       throw new ApiError(status, message);
     }
@@ -92,7 +92,7 @@ export const createUser = async (data: {
       throw new ApiError(0, "Backend CORS not configured. Contact backend developer to add CORS headers.");
     }
     if (error.response) {
-      const status = error.response.status;
+      const status = error.response;
       const message = error.response.data?.message || "Failed to create user";
       throw new ApiError(status, message);
     }
@@ -113,7 +113,7 @@ export const updateUser = async (
       throw new ApiError(0, "Backend CORS not configured. Contact backend developer to add CORS headers.");
     }
     if (error.response) {
-      const status = error.response.status;
+      const status = error.response;
       const message = error.response.data?.message || "Failed to update user";
       throw new ApiError(status, message);
     }
@@ -132,7 +132,7 @@ export const deleteUser = async (id: number): Promise<void> => {
       throw new ApiError(0, "Backend CORS not configured. Contact backend developer to add CORS headers.");
     }
     if (error.response) {
-      const status = error.response.status;
+      const status = error.response;
       const message = error.response.data?.message || "Failed to delete user";
       throw new ApiError(status, message);
     }

@@ -34,11 +34,11 @@ export default function RootLayout({
         h-full
         scroll-smooth
       `}
-    >
+>
       <body
         className="
           min-h-screen
-          bg-white
+          bg-blue-50
           text-gray-900
           antialiased
           font-sans

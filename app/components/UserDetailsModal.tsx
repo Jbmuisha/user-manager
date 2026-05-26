@@ -41,40 +41,42 @@ export default function UserDetailsModal({ open, user, onClose }: Props) {
       });
 
   return (
-    <Dialog
+<Dialog
       open={open}
       onClose={onClose}
       maxWidth="sm"
       fullWidth
       sx={{
-        "& .MuiPaper-root": {
-          borderRadius: 3,
-          padding: 1,
-        },
+        "& .MuiDialog-paper": {
+          borderRadius: "12px",
+          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.12)",
+        }
       }}
     >
-      <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <Box>
-          <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
-            User Details
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            View user information
-          </Typography>
+      <DialogTitle sx={{ pb: 1, borderBottom: "1px solid #e2e8f0" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Box>
+            <Typography variant="h5" component="div" sx={{ fontWeight: "bold", color: "#1e293b" }}>
+              User Details
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              View user information
+            </Typography>
+          </Box>
+          <IconButton onClick={onClose} size="small" sx={{ color: "#64748b" }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
-        <IconButton onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
       </DialogTitle>
 
-      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, pt: 2 }}>
+      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, pt: 3 }}>
         {/* Avatar */}
         <Box sx={{ display: "flex", justifyContent: "center", pb: 2 }}>
           <Avatar
             sx={{
               width: 80,
               height: 80,
-              bgcolor: "primary.main",
+              bgcolor: "#4f46e5",
               fontSize: 40,
             }}
           >
@@ -83,76 +85,92 @@ export default function UserDetailsModal({ open, user, onClose }: Props) {
         </Box>
 
         {/* Name */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "grey.50", borderRadius: 2 }}>
-          <PersonIcon color="action" />
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "#f8fafc", borderRadius: 2 }}>
+          <PersonIcon sx={{ color: "#64748b" }} />
           <Box>
             <Typography variant="caption" color="text.secondary">
               Name
             </Typography>
-            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+            <Typography variant="body1" sx={{ fontWeight: "bold", color: "#1e293b" }}>
               {user.name}
             </Typography>
           </Box>
         </Box>
 
         {/* Email */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "grey.50", borderRadius: 2 }}>
-          <EmailIcon color="action" />
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "#f8fafc", borderRadius: 2 }}>
+          <EmailIcon sx={{ color: "#64748b" }} />
           <Box>
             <Typography variant="caption" color="text.secondary">
               Email
             </Typography>
-            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+            <Typography variant="body1" sx={{ fontWeight: "bold", color: "#1e293b" }}>
               {user.email}
             </Typography>
           </Box>
         </Box>
 
         {/* Role */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "grey.50", borderRadius: 2 }}>
-          <BadgeIcon color="action" />
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "#f8fafc", borderRadius: 2 }}>
+          <BadgeIcon sx={{ color: "#64748b" }} />
           <Box>
             <Typography variant="caption" color="text.secondary">
               Role
             </Typography>
-            <Typography variant="body1" sx={{ fontWeight: "bold", textTransform: "capitalize" }}>
+            <Typography variant="body1" sx={{ fontWeight: "bold", color: "#1e293b", textTransform: "capitalize" }}>
               {user.role.replace(/_/g, " ")}
             </Typography>
           </Box>
         </Box>
 
         {/* Status */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "grey.50", borderRadius: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "#f8fafc", borderRadius: 2 }}>
           <Box>
             <Typography variant="caption" color="text.secondary">
               Status
             </Typography>
-            <Box>
+            <Box sx={{ mt: 0.5 }}>
               <Chip
                 label={user.is_active ? "Active" : "Inactive"}
-                color={user.is_active ? "success" : "default"}
                 size="small"
+                sx={{
+                  backgroundColor: user.is_active ? "#dcfce7" : "#f1f5f9",
+                  color: user.is_active ? "#166534" : "#64748b",
+                  fontWeight: 600,
+                  borderRadius: "16px",
+                }}
               />
             </Box>
           </Box>
         </Box>
 
         {/* Created At */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "grey.50", borderRadius: 2 }}>
-          <CalendarTodayIcon color="action" />
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2, bgcolor: "#f8fafc", borderRadius: 2 }}>
+          <CalendarTodayIcon sx={{ color: "#64748b" }} />
           <Box>
             <Typography variant="caption" color="text.secondary">
               Created At
             </Typography>
-            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+            <Typography variant="body1" sx={{ fontWeight: "bold", color: "#1e293b" }}>
               {formattedDate}
             </Typography>
           </Box>
         </Box>
       </DialogContent>
 
-      <DialogActions sx={{ padding: 2, pt: 0 }}>
-        <Button onClick={onClose} variant="contained" fullWidth>
+      <DialogActions sx={{ px: 3, pb: 3 }}>
+        <Button 
+          onClick={onClose} 
+          variant="contained" 
+          fullWidth
+          sx={{
+            backgroundColor: "#4f46e5",
+            borderRadius: 2,
+            textTransform: "none",
+            fontWeight: 600,
+            "&:hover": { backgroundColor: "#4338ca" },
+          }}
+        >
           Close
         </Button>
       </DialogActions>
